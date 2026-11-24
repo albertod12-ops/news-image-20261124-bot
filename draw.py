@@ -694,21 +694,35 @@ def _scene_chess(g, w, h):
 
 
 def _scene_rescue(g, w, h):
-    # Boy freed after 14 hours in Dymer: a damaged block, a ladder
-    # against it, a stretcher below, a rescuer's helmet.
-    _rect(g, 0, 0, w, h, (150, 160, 175))
-    _rect(g, 30, 24, 130, h, (110, 105, 95))
-    for wy in (32, 46, 60):
-        for wx in (40, 66, 92):
-            _rect(g, wx, wy, wx + 14, wy + 8, (40, 40, 50))
-    _rect(g, 82, 74, 92, 82, (255, 180, 60))
-    _poly(g, [(30, 24), (80, 10), (130, 24)], (70, 65, 60))
-    _line(g, [(140, 30), (140, h)], (200, 60, 40), 3)
-    _line(g, [(156, 30), (156, h)], (200, 60, 40), 3)
-    for ry in range(38, h - 4, 12):
-        _line(g, [(140, ry), (156, ry)], (200, 60, 40), 2)
-    _rect(g, 160, 48, 194, 56, (220, 220, 220), out=INK)
-    _disc(g, 178, 40, 6, (255, 210, 31), out=INK)
+    # Boy freed after 14 hours in Dymer: a RESCUE, not a building.
+    # Bright blue sky and a big red ladder are the focus; a rescuer
+    # in orange with a yellow helmet reaches a child at the top.
+    # The damaged block is only a small dark silhouette at the
+    # left edge, so the scene reads nothing like the grey destroyed
+    # building of the strike scene (#11).
+    _rect(g, 0, 0, w, h, (110, 190, 245))
+    _disc(g, 176, 14, 10, GOLD, out=INK)
+    _disc(g, 28, 10, 6, "white")
+    _disc(g, 36, 12, 5, "white")
+    _disc(g, 120, 8, 5, "white")
+    _rect(g, 0, 72, w, h, (235, 220, 190))
+    _rect(g, 0, 52, 26, h, (75, 72, 85))
+    _rect(g, 5, 58, 11, 64, (40, 40, 50))
+    _rect(g, 15, 58, 21, 64, (40, 40, 50))
+    _line(g, [(78, 80), (128, 22)], (215, 60, 25), 4)
+    _line(g, [(90, 80), (140, 22)], (215, 60, 25), 4)
+    for x0, x1, ry in ((86, 98, 71), (93, 105, 63), (100, 112, 54),
+                       (108, 120, 45), (115, 127, 37), (123, 135, 28)):
+        _line(g, [(x0, ry), (x1, ry)], (215, 60, 25), 2)
+    _disc(g, 112, 34, 7, (255, 210, 31), out=INK)
+    _rect(g, 105, 40, 119, 58, (240, 110, 30), out=INK)
+    _rect(g, 107, 58, 111, 68, (40, 40, 50))
+    _rect(g, 114, 58, 118, 68, (40, 40, 50))
+    _line(g, [(118, 44), (130, 30)], (240, 110, 30), 3)
+    _disc(g, 136, 15, 5, (255, 200, 150), out=INK)
+    _rect(g, 131, 20, 141, 34, (20, 150, 120), out=INK)
+    _line(g, [(131, 24), (124, 20)], (20, 150, 120), 2)
+    _line(g, [(141, 24), (148, 20)], (20, 150, 120), 2)
 
 
 def _scene_strike(g, w, h):
