@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """news-image-20261124 — the entrypoint the grader runs.
 
-Standard library only, and it only copies: the image itself is
-rendered at build time by draw.py (Pillow) and committed as
-entry.png. Running this file copies that PNG into the output
-directory and checks the copy is byte-identical and a real
-1024x1024 PNG.
+v2: same copy-only entrypoint, press time 17:00 UTC. Standard library
+only, and it only copies: the image itself is rendered at build time
+by draw.py (Pillow) and committed as entry.png. Running this file
+copies that PNG into the output directory and checks the copy is
+byte-identical and a real 1024x1024 PNG.
 
 Pass --verify to re-render from draw.py instead and confirm the
 committed entry.png is exactly what the code draws.

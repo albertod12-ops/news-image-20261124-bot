@@ -12,8 +12,13 @@ numbered pins next to a 21-line also-list, a red DATE CHECK box and a
 footer with the sources and the certainty legend.
 
 Facts: every story was reported or updated Mon 23 – Tue 24 Nov 2026
-(UTC), press time 04:00 UTC, checked against the wires (Reuters, AP,
-AFP, BBC, Al Jazeera, UN News, CNN, SCMP, RTHK, ATP, FIDE). The art
+(UTC), press time 17:00 UTC, checked against the wires (Reuters, AP,
+AFP, BBC, Al Jazeera, UN News, CNN, SCMP, RTHK, ATP, FIDE, Vanguard).
+v2 refreshes the tolls (Cikande 26, Bayelsa 32), the chess opener, the
+Nvidia Tuesday slide and the COP31 fallout, and applies the approved
+sum-23 template refinements: bold-italic red kicker, edge-to-edge navy
+UTC band, separate region boxes, three-column also-list with flags and
+status pills, region-coloured numbers. The art
 is flat vector drawing done here with Pillow; there are no photos and
 no borrowed pictures. The words are the author's own summaries.
 
@@ -37,6 +42,7 @@ PAPER = (247, 242, 231)
 CARD = (253, 250, 242)
 INK = (17, 17, 17)
 NAVY = (16, 62, 150)
+MIDNIGHT = (25, 41, 111)
 RED = (220, 28, 60)
 DARKRED = (179, 34, 44)
 GOLD = (232, 178, 36)
@@ -61,7 +67,10 @@ _DIRS = {"dejavu": "/usr/share/fonts/truetype/dejavu",
 _SPECS = [
     ("title", "LiberationSerif-Bold.ttf", 102, "liber"),
     ("kicker", "NotoSans-Black.ttf", 15, "noto"),
-    ("deckline", "NotoSerif-Italic.ttf", 17, "noto"),
+    ("deckline", "LiberationSerif-BoldItalic.ttf", 16, "liber"),
+    ("tl_time", "NotoSans-Bold.ttf", 11, "noto"),
+    ("tl_ev", "NotoSans-Bold.ttf", 9, "noto"),
+    ("also_sub", "NotoSans-Regular.ttf", 7, "noto"),
     ("time", "NotoSans-Bold.ttf", 12, "noto"),
     ("time_small", "NotoSans-Bold.ttf", 10, "noto"),
     ("kick", "NotoSans-Bold.ttf", 10, "noto"),
@@ -83,7 +92,7 @@ _SPECS = [
     ("hero_lbl_small", "NotoSans-Bold.ttf", 9, "noto"),
     ("small_lbl", "NotoSans-Black.ttf", 12, "noto"),
     ("small_lbl_small", "NotoSans-Bold.ttf", 8, "noto"),
-    ("also", "NotoSans-Bold.ttf", 11, "noto"),
+    ("also", "NotoSans-Bold.ttf", 10, "noto"),
     ("also_num", "NotoSans-Bold.ttf", 11, "noto"),
     ("section", "NotoSans-Black.ttf", 13, "noto"),
     ("stat_num", "NotoSans-Black.ttf", 36, "noto"),
@@ -100,21 +109,21 @@ NOTO_DIR = _DIRS["noto"]
 # --- layout ---------------------------------------------------------------
 MARGIN = 12
 RIGHT = 1012
-HERO_Y = 267
+HERO_Y = 270
 HERO_ART = 100
 HERO_KICK = 14
 HERO_TEXT = 101
 HERO_H = HERO_ART + HERO_KICK + HERO_TEXT
-SMALL_Y = 488
+SMALL_Y = 491
 SMALL_ROW = 154
 SMALL_W = 162
 SMALL_ART = 56
 SMALL_KICK = 14
 SMALL_H = SMALL_ART + 92
-MAP_Y = 801
+MAP_Y = 804
 MAP_W, MAP_H = 336, 140
-CHK_Y = 969
-FOOT_Y = 999
+CHK_Y = 972
+FOOT_Y = 1002
 
 PROBLEMS = []
 
@@ -131,22 +140,22 @@ def _s(n, place, topic, src, status, head, deck, big, small, art, tag):
 
 
 FRONT = [
-    _s(1, "BENGHAZI", "WAR", "ZELENSKYY · AP · WSJ", "REPORTED",
+    _s(1, "BENGHAZI", "WAR", "AP · WSJ · REUTERS", "REPORTED",
        "Ukraine sinks Russian corvette off Libya",
-       "Seven sea drones hit the Merkury in Benghazi port; a Ka-27 helicopter aboard was destroyed and the cargo ship Angara set ablaze. Libya condemns the strike.",
+       "Seven sea drones hit the Merkury in Benghazi port; a Ka-27 helicopter aboard was destroyed and the Angara set ablaze. Kyiv calls it self-defence.",
        "7 SEA DRONES", "MERKURY SUNK", "merkury", "CONFIRMED"),
     _s(2, "ANTALYA", "CLIMATE", "UN NEWS · CNN · BBC", "REPORTED",
        "COP31 collapses: no deal on fossil fuels",
-       "The longest COP on record ends with no pact — the first breakdown since 2009. Fossil fuels were stripped; the EU refused the text.",
+       "No pact — the first COP breakdown since 2009. Fossil fuels were stripped from the text; now the EU wants the rules rewritten.",
        "NO DEAL", "LONGEST COP EVER", "cop31", "CONFIRMED"),
-    _s(3, "SANTA CLARA", "TECH", "WSJ · CNN · NVIDIA", "REPORTED",
+    _s(3, "SANTA CLARA", "TECH", "WSJ · CNN · REUTERS", "REPORTED",
        "Nvidia brings Huang back as CEO",
-       "Eleven days after resigning, Huang is reinstated by a unanimous board vote. The stock jumped 31%; Trump backed the return.",
+       "Reinstated by a unanimous board vote, 11 days after resigning. Stock jumped 31% Monday to $165.05, then slid ~6% Tuesday.",
        "HUANG IS BACK", "+31% IN A DAY", "nvidia", "CONFIRMED"),
-    _s(4, "CIKANDE", "FIRE", "REUTERS", "REPORTED",
-       "Candy-factory fire toll now 24",
-       "24 dead confirmed; about 30 still missing. 29 are safe. — REUTERS",
-       "24 DEAD", "30 STILL MISSING", "factoryfire", "CONFIRMED"),
+    _s(4, "CIKANDE", "FIRE", "AP", "REPORTED",
+       "Candy-factory fire toll now 26",
+       "26 dead confirmed Tuesday; 8 more missing. 29 are safe. — AP",
+       "26 DEAD", "8 STILL MISSING", "factoryfire", "CONFIRMED"),
     _s(5, "WELLINGTON", "TEST", "AFP", "REPORTED",
        "India's 720/9 ends in a draw",
        "NZ survive 120 overs, 239/5; Mitchell 49*, Phillips 26*. — AFP",
@@ -165,7 +174,7 @@ FRONT = [
        "$1.62BN", "NEPAL REBUILDS", "nepal", "CONFIRMED"),
     _s(9, "GENEVA", "CHESS", "FIDE", "OFFICIAL",
        "Chess crown fight begins today",
-       "Gukesh, 20, meets Sindarov, 20, in a 14-game final. — FIDE",
+       "Game 1 under way: Sindarov White; Gukesh answers with the Berlin. — FIDE",
        "GUKESH v SINDAROV", "BOTH AGED 20", "chess", "OFFICIAL"),
     _s(10, "DYMER", "RESCUE", "KYIV", "REPORTED",
        "Boy, 7, freed after 14 hours",
@@ -193,56 +202,100 @@ FRONT = [
        "258 SEATS", "BEST SINCE 1992", "capitol", "CONFIRMED"),
 ]
 
-# The also-list: (number, city, one-line story, outlet). Each line is
-# measured to fit one 320px column in 11px bold. All 21 were reported,
-# or updated, Mon 23 – Tue 24 Nov 2026.
+# The also-list: (number, city, main line, detail, outlet, region,
+# flag code). Main lines fit one 160px column in 10px bold; the detail
+# plus outlet fits the 7px grey sub-line below. All 21 were reported,
+# or updated, Mon 23 – Tue 24 Nov 2026. Statuses: REPORTED except
+# 20, 22, 27 ONGOING (awaiting a ruling / still marching / search
+# continues) and 33 CLAIM (one side's claim).
 ALSO = [
-    (16, "Tehran", "singer flogged 74 lashes", "BBC"),
-    (17, "Dhaka", "garment workers reject pay offer", "AP"),
-    (18, "New York", "New Yorkers stock up amid outages", "BBC"),
-    (19, "Dushanbe", "Tajikistan moves to leave the ICC", "UN"),
-    (20, "Rabat", "Afcon 2025 title hangs on a CAS ruling", "BBC"),
-    (21, "Copenhagen", "top court backs 'ghetto law'", "BBC"),
-    (22, "Paris", "far-left protests enter a sixth weekend", "BBC"),
-    (23, "Harare", "preacher Uebert Angel arrested", "BBC"),
-    (24, "Ottawa", "Carney stages Trump impersonator", "BBC"),
-    (25, "Berlin", "bomb threats emailed to schools", "AP"),
-    (26, "Skopje", "North Macedonia still stalled on EU path", "AP"),
-    (27, "Bayelsa", "mourners' boat sinks; 29 dead", "AP"),
-    (28, "Khan Younis", "infant dies of cold in Gaza tent", "BBC"),
-    (29, "Khartoum", "drone strikes kill 4 near the capital", "AFP"),
-    (30, "London", "Burnham hails 'landmark' EU deal", "BBC"),
-    (31, "Washington", "Trump: Schumer hard to work with", "AP"),
-    (32, "Shenzhen", "Japan's APEC welcome falls flat", "AP"),
-    (33, "Benghazi", "Libya army says port secure", "AP"),
-    (34, "Brussels", "EU budget plan targets Big Tech, 3% tax", "AP"),
-    (35, "Ramallah", "settlers seize West Bank zones", "AP"),
-    (36, "New York", "25 seafarers killed in Hormuz", "UN"),
+    (16, "Tehran", "Tehran: singer flogged",
+     "74 lashes for protest songs", "BBC", "MIDDLE EAST", "IR"),
+    (17, "Dhaka", "Dhaka: workers clash",
+     "Pay protests shut factories", "REUTERS", "ASIA", "BD"),
+    (18, "New York", "New York: stocking up",
+     "Cold bites as outages hit city", "BBC", "AMERICAS", "US"),
+    (19, "Baghdad", "Baghdad: PM seizes crossings",
+     "Smuggling probe behind move", "REUTERS", "MIDDLE EAST", "IQ"),
+    (20, "Rabat", "Rabat: Afcon title in doubt",
+     "Morocco–Senegal final disputed", "BBC", "AFRICA", "MA"),
+    (21, "Copenhagen", "Copenhagen: ghetto law stands",
+     "Housing law survives challenge", "BBC", "EUROPE", "DK"),
+    (22, "Paris", "Paris: protests, week six",
+     "Far-left marches continue", "BBC", "EUROPE", "FR"),
+    (23, "Harare", "Harare: preacher arrested",
+     "Arrest after fraud claims", "BBC", "AFRICA", "ZW"),
+    (24, "Ottawa", "Ottawa: Carney's Trump act",
+     "PM mocks US president on stage", "BBC", "AMERICAS", "CA"),
+    (25, "Berlin", "Berlin: school bomb threats",
+     "Police clear buildings; no devices", "AP", "EUROPE", "DE"),
+    (26, "Beijing", "Beijing: mineral pause kept",
+     "Gallium curbs eased to Jan 27", "REUTERS", "ASIA", "CN"),
+    (27, "Bayelsa", "Bayelsa: boat toll now 32",
+     "Crane lifts wreck; toll climbs", "VANGUARD", "AFRICA", "NG"),
+    (28, "Khan Younis", "Khan Younis: infant dies",
+     "Gaza winter claims youngest victim", "BBC", "MIDDLE EAST", "PS"),
+    (29, "Khartoum", "Khartoum: drone strikes kill 4",
+     "Attacks hit near the capital", "AFP", "AFRICA", "SD"),
+    (30, "London", "London: UK sanctions Houthis",
+     "Four senior figures targeted", "REUTERS", "EUROPE", "GB"),
+    (31, "Caracas", "Caracas: debt put at $237.5bn",
+     "First full accounts in years", "REUTERS", "AMERICAS", "VE"),
+    (32, "Shanghai", "Shanghai: Chen Jining probed",
+     "Shanghai party chief probed", "REUTERS", "ASIA", "CN"),
+    (33, "Benghazi", "Benghazi: port secure",
+     "Army claims drones downed", "AP", "AFRICA", "LY"),
+    (34, "Brussels", "Brussels: 3% Big Tech tax plan",
+     "Budget plan targets US giants", "AP", "EUROPE", "BE"),
+    (35, "Ramallah", "Ramallah: settlers seize zones",
+     "Land seizures condemned", "AP", "MIDDLE EAST", "PS"),
+    (36, "New York", "New York: 25 seafarers killed",
+     "Tanker attack toll confirmed", "UN", "AMERICAS", "UN"),
 ]
+ALSO_STATUS = {16: "REPORTED", 17: "REPORTED", 18: "REPORTED",
+               19: "REPORTED", 20: "ONGOING", 21: "REPORTED",
+               22: "ONGOING", 23: "REPORTED", 24: "REPORTED",
+               25: "REPORTED", 26: "REPORTED", 27: "ONGOING",
+               28: "REPORTED", 29: "REPORTED", 30: "REPORTED",
+               31: "REPORTED", 32: "REPORTED", 33: "CLAIM",
+               34: "REPORTED", 35: "REPORTED", 36: "REPORTED"}
+STATUS_FILL = {"REPORTED": GREEN, "CLAIM": AMBER, "ONGOING": SKYBLUE}
 
-# The six biggest figures on the page, one per top story.
+# Region fills sampled from the approved sum-23 template (bagarte):
+# EUROPE blue, MIDDLE EAST red, AFRICA green, ASIA orange,
+# AMERICAS purple, OCEANIA teal, WORLD dark grey. Also-list numbers
+# and the six stat figures are coloured by region.
+REGION_FILL = {"EUROPE": (36, 100, 198), "MIDDLE EAST": (198, 52, 38),
+               "AFRICA": (39, 136, 63), "ASIA": (225, 118, 23),
+               "AMERICAS": (116, 82, 189), "OCEANIA": (20, 136, 140),
+               "WORLD": (72, 72, 84)}
+
+# The six biggest figures on the page, one per top story, each in
+# its story's region colour: 7 AFRICA, 26 ASIA, 258 AMERICAS,
+# $1.62bn ASIA, +31% AMERICAS, 98.79% ASIA.
 STATS = [
-    ("7", "sea drones sink the Merkury"),
-    ("24", "dead in the Cikande fire"),
-    ("258", "House seats for Democrats"),
-    ("$1.62bn", "India's aid to Nepal"),
-    ("+31%", "Nvidia jumps on Huang"),
-    ("98.79%", "Hong Kong turnout"),
+    ("7", "sea drones sink the Merkury", "AFRICA"),
+    ("26", "dead in the Cikande fire", "ASIA"),
+    ("258", "House seats for Democrats", "AMERICAS"),
+    ("$1.62bn", "India's aid to Nepal", "ASIA"),
+    ("+31%", "Nvidia jumps on Huang", "AMERICAS"),
+    ("98.79%", "Hong Kong turnout", "ASIA"),
 ]
 
-# Region counts, counted from the 36 stories by subject: EUROPE 11
-# (6, 7, 9, 10, 14, 21, 22, 25, 26, 30, 34); MIDDLE EAST 4 (11, 16,
-# 28, 35); AFRICA 6 (1, 20, 23, 27, 29, 33); ASIA-PACIFIC 6 (4, 8,
-# 12, 17, 19, 32); AMERICAS 7 (3, 13, 15, 18, 24, 31, 36); OCEANIA 1
-# (5); WORLD 1 (2, COP31 — Antalya venue, global subject). Total 36.
+# Region counts, counted from the 36 stories by subject: EUROPE 10
+# (6, 7, 9, 10, 14, 21, 22, 25, 30, 34); MIDDLE EAST 5 (11, 16,
+# 19, 28, 35); AFRICA 6 (1, 20, 23, 27, 29, 33); ASIA 6 (4, 8,
+# 12, 17, 26, 32); AMERICAS 7 (3, 13, 15, 18, 24, 31, 36);
+# OCEANIA 1 (5); WORLD 1 (2, COP31 — Antalya venue, global
+# subject). Total 36.
 REGIONS = [
-    ("EUROPE", 11, (16, 62, 150)),
-    ("MIDDLE EAST", 4, (200, 60, 30)),
-    ("AFRICA", 6, (30, 130, 80)),
-    ("ASIA-PACIFIC", 6, (90, 60, 140)),
-    ("AMERICAS", 7, (16, 40, 90)),
-    ("OCEANIA", 1, (0, 120, 180)),
-    ("WORLD", 1, (90, 90, 90)),
+    ("EUROPE", 10, (36, 100, 198)),
+    ("MIDDLE EAST", 5, (198, 52, 38)),
+    ("AFRICA", 6, (39, 136, 63)),
+    ("ASIA", 6, (225, 118, 23)),
+    ("AMERICAS", 7, (116, 82, 189)),
+    ("OCEANIA", 1, (20, 136, 140)),
+    ("WORLD", 1, (72, 72, 84)),
 ]
 
 # --- the map ---------------------------------------------------------------
@@ -257,11 +310,11 @@ PINS = {
 }
 DOTS = {
     16: (51.4, 35.7), 17: (90.4, 23.8), 18: (-74.0, 40.7),
-    19: (68.8, 38.6), 20: (-6.8, 34.0), 21: (12.6, 55.7),
+    19: (44.4, 33.3), 20: (-6.8, 34.0), 21: (12.6, 55.7),
     22: (2.35, 48.85), 23: (31.0, -17.8), 24: (-75.7, 45.4),
-    25: (13.4, 52.5), 26: (21.4, 42.0), 27: (6.3, 4.9),
+    25: (13.4, 52.5), 26: (116.4, 39.9), 27: (6.3, 4.9),
     28: (34.5, 31.3), 29: (32.6, 15.6), 30: (-0.1, 51.5),
-    31: (-77.0, 38.9), 32: (114.1, 22.5), 33: (20.1, 32.1),
+    31: (-66.9, 10.5), 32: (121.5, 31.2), 33: (20.1, 32.1),
     34: (4.4, 50.8), 35: (35.2, 31.9), 36: (-74.0, 40.7),
 }
 # The map is 336x140, equirectangular: 0.93px per degree of longitude,
@@ -270,7 +323,7 @@ DOTS = {
 # a few pixels with a thin leader line back to their true spot. Every
 # offset below was checked numerically (min pin-pin 14px, min pin-dot
 # 9px, min dot-dot 4.5px, zero out-of-box after fanning):
-#  pin 1 Benghazi W (-18,8) clears Antalya pin 2, Gaza pin 11, Skopje 26;
+#  pin 1 Benghazi W (-18,8) clears Antalya pin 2, Gaza pin 11;
 #  pin 2 Antalya E (12,6) clears Dymer pin 10 and Gaza pin 11;
 #  pin 5 Wellington W (-8,0) keeps the pin inside the map frame;
 #  pin 6 Turin E (16,8) clears Geneva pin 9;
@@ -284,12 +337,13 @@ DOTS = {
 #  dot 22 Paris W (-10,-8) clears Geneva pin 9 and London dot 30;
 #  dot 24 Ottawa W (-12,-6) clears Washington pin 15, New York dot 18;
 #  dot 25 Berlin S (0,12) clears Copenhagen dot 21 and Dymer pin 10;
-#  dot 26 Skopje W (-12,10) clears Turin pin 6 and Geneva pin 9;
+#  dot 19 Baghdad W (-12,-14) clears Antalya pin 2, Ramallah dot 35;
+#  dot 26 Beijing clears Hong Kong pin 12;
+#  dot 31 Caracas clears Atlanta pin 13, New York dots 18 and 36;
+#  dot 32 Shanghai E (16,-12) clears Hong Kong pin 12, Beijing dot 26;
 #  dot 28 Khan Younis S (0,12) clears Turin pin 6 and Gaza pin 11;
 #  dot 29 Khartoum SE (10,6) clears Gaza pin 11;
 #  dot 30 London N (0,-12) clears Paris dot 22 and Geneva pin 9;
-#  dot 31 Washington W (-10,10) clears Atlanta pin 13, Ottawa dot 24;
-#  dot 32 Shenzhen E (14,-10) clears Hong Kong pin 12;
 #  dot 33 Benghazi NE (12,-12) clears Turin pin 6 and Dymer pin 10;
 #  dot 34 Brussels NE (8,-10) clears Geneva pin 9 and Paris dot 22;
 #  dot 35 Ramallah NE (12,-10) clears Khan Younis dot 28, Gaza pin 11;
@@ -297,9 +351,9 @@ DOTS = {
 PIN_OFF = {1: (-18, 8), 2: (12, 6), 5: (-8, 0), 6: (16, 8),
            7: (0, -12), 10: (14, -6), 11: (-14, 14), 13: (-12, 8),
            14: (-18, 10)}
-DOT_OFF = {16: (8, 8), 18: (10, -8), 22: (-10, -8), 24: (-12, -6),
-           25: (0, 12), 26: (-12, 10), 28: (0, 12), 29: (10, 6),
-           30: (0, -12), 31: (-10, 10), 32: (14, -10), 33: (12, -12),
+DOT_OFF = {16: (8, 8), 18: (10, -8), 19: (-12, -14), 22: (-10, -8),
+           24: (-12, -6), 25: (0, 12), 28: (0, 12), 29: (10, 6),
+           30: (0, -12), 32: (16, -12), 33: (12, -12),
            34: (8, -10), 35: (12, -10), 36: (14, 8)}
 
 
@@ -395,6 +449,110 @@ def _scrim(g, w, h, big, small):
     _rect(g, 0, h - 34, box_w, h, (10, 10, 14))
     _text(g, (8, h - 30), big, f_big, "white")
     _text(g, (8, h - 15), small, FT.hero_lbl_small, "white")
+
+def _flag(g, code, x, y, w=16, h=11):
+    """A small flat flag for an also-list item, drawn in simple bands
+    and emblems at 16x11 px — no emoji, no borrowed pictures."""
+    def hband(y0, y1, col):
+        g.rectangle([x, y + y0, x + w, y + y1], fill=col)
+
+    def vband(x0, x1, col):
+        g.rectangle([x + x0, y, x + x1, y + h], fill=col)
+
+    def disc(cx, cy, r, col):
+        g.ellipse([x + cx - r, y + cy - r, x + cx + r, y + cy + r],
+                  fill=col)
+
+    if code == "IR":  # Iran: green-white-red horizontal
+        hband(0, h // 3, (0, 122, 61))
+        hband(h // 3, 2 * h // 3, "white")
+        hband(2 * h // 3, h, (218, 0, 0))
+    elif code == "BD":  # Bangladesh: green, red disc
+        g.rectangle([x, y, x + w, y + h], fill=(0, 106, 78))
+        disc(w // 2 - 1, h // 2, 4, (244, 42, 65))
+    elif code == "US":  # USA: stripes + blue canton
+        for i in range(7):
+            hband(i * h // 7, (i + 1) * h // 7,
+                  (178, 34, 52) if i % 2 == 0 else "white")
+        g.rectangle([x, y, x + w * 2 // 5, y + h * 4 // 7],
+                    fill=(60, 59, 110))
+        for sx in (2, 6, 10):
+            for sy in (2, 5):
+                disc(sx, sy, 1, "white")
+    elif code == "IQ":  # Iraq: red-white-black + green disc
+        hband(0, h // 3, (200, 30, 40))
+        hband(h // 3, 2 * h // 3, "white")
+        hband(2 * h // 3, h, (0, 0, 0))
+        disc(w // 2, h // 2, 2, (0, 122, 61))
+    elif code == "MA":  # Morocco: red, green disc
+        g.rectangle([x, y, x + w, y + h], fill=(200, 30, 40))
+        disc(w // 2, h // 2, 3, (0, 106, 78))
+    elif code == "DK":  # Denmark: red, white cross
+        g.rectangle([x, y, x + w, y + h], fill=(200, 30, 40))
+        g.rectangle([x + 5, y, x + 7, y + h], fill="white")
+        g.rectangle([x, y + 4, x + w, y + 6], fill="white")
+    elif code == "FR":  # France: blue-white-red vertical
+        vband(0, w // 3, (0, 85, 164))
+        vband(w // 3, 2 * w // 3, "white")
+        vband(2 * w // 3, w, (239, 65, 53))
+    elif code == "ZW":  # Zimbabwe: green-yellow-red-black bands
+        hband(0, h // 4, (0, 140, 60))
+        hband(h // 4, h // 2, (255, 210, 0))
+        hband(h // 2, 3 * h // 4, (200, 30, 40))
+        hband(3 * h // 4, h, (0, 0, 0))
+    elif code == "CA":  # Canada: red-white-red + red disc
+        vband(0, w // 4, (200, 30, 40))
+        vband(w // 4, 3 * w // 4, "white")
+        vband(3 * w // 4, w, (200, 30, 40))
+        disc(w // 2, h // 2, 2, (200, 30, 40))
+    elif code == "DE":  # Germany: black-red-gold horizontal
+        hband(0, h // 3, (0, 0, 0))
+        hband(h // 3, 2 * h // 3, (200, 30, 40))
+        hband(2 * h // 3, h, (255, 210, 0))
+    elif code == "CN":  # China: red, gold disc
+        g.rectangle([x, y, x + w, y + h], fill=(200, 30, 40))
+        disc(4, 3, 2, (255, 210, 0))
+    elif code == "NG":  # Nigeria: green-white-green vertical
+        vband(0, w // 3, (0, 140, 60))
+        vband(w // 3, 2 * w // 3, "white")
+        vband(2 * w // 3, w, (0, 140, 60))
+    elif code == "PS":  # Palestine: black-white-green + red triangle
+        hband(0, h // 3, (0, 0, 0))
+        hband(h // 3, 2 * h // 3, "white")
+        hband(2 * h // 3, h, (0, 140, 60))
+        _poly(g, [(x, y), (x, y + h), (x + w // 2, y + h // 2)],
+              (200, 30, 40))
+    elif code == "SD":  # Sudan: red-white-black + green triangle
+        hband(0, h // 3, (200, 30, 40))
+        hband(h // 3, 2 * h // 3, "white")
+        hband(2 * h // 3, h, (0, 0, 0))
+        _poly(g, [(x, y), (x, y + h), (x + w // 2, y + h // 2)],
+              (0, 122, 61))
+    elif code == "GB":  # UK: blue, white diagonals, red cross
+        g.rectangle([x, y, x + w, y + h], fill=(0, 36, 125))
+        _line(g, [x, y, x + w, y + h], "white", 2)
+        _line(g, [x + w, y, x, y + h], "white", 2)
+        g.rectangle([x + w // 2 - 1, y, x + w // 2 + 1, y + h],
+                    fill=(200, 16, 46))
+        g.rectangle([x, y + h // 2 - 1, x + w, y + h // 2 + 1],
+                    fill=(200, 16, 46))
+    elif code == "VE":  # Venezuela: yellow-blue-red horizontal
+        hband(0, h // 3, (255, 210, 0))
+        hband(h // 3, 2 * h // 3, (0, 85, 164))
+        hband(2 * h // 3, h, (200, 30, 40))
+    elif code == "LY":  # Libya: red-black-green horizontal
+        hband(0, h // 3, (200, 30, 40))
+        hband(h // 3, 2 * h // 3, (0, 0, 0))
+        hband(2 * h // 3, h, (0, 140, 60))
+    elif code == "BE":  # Belgium: black-yellow-red vertical
+        vband(0, w // 3, (0, 0, 0))
+        vband(w // 3, 2 * w // 3, (255, 210, 0))
+        vband(2 * w // 3, w, (200, 30, 40))
+    elif code == "UN":  # UN: light blue, white disc
+        g.rectangle([x, y, x + w, y + h], fill=(90, 160, 220))
+        disc(w // 2, h // 2, 3, "white")
+    else:  # unknown code: plain grey chip
+        g.rectangle([x, y, x + w, y + h], fill=(150, 150, 150))
 
 # --- art scenes --------------------------------------------------------------
 # One function per picture, drawn from scratch in flat vector shapes.
@@ -939,10 +1097,12 @@ def build():
     page = Image.new("RGB", (W, H), PAPER)
     g = ImageDraw.Draw(page)
 
-    # ---- masthead, 0-133: the title at 102px on its own layer,
+    # ---- masthead, 0-135: the title at 102px on its own layer,
     # squeezed horizontally to 996px so its ink top sits at 19 (ink
-    # 19-112, ~93px tall); the deck line at y=110; the kicker at the
-    # top right; the bottom rule at 131-133. ----
+    # 19-112, ~93px tall); the red kicker in bold italic serif,
+    # cropped to its ink and stretched to exactly 1000px wide, ink
+    # top at 117 (5px clear of the masthead "y" descender); the
+    # top-right strip; the bottom rule at 133-135. ----
     title = "Tuesday 24 November 2026"
     layer_w = int(g.textlength(title, font=FT.title)) + 8
     layer = Image.new("RGBA", (layer_w, 130), (0, 0, 0, 0))
@@ -951,43 +1111,58 @@ def build():
     ink_top = layer.getbbox()[1]
     scaled = layer.resize((996, 130), Image.LANCZOS)
     page.paste(scaled, (MARGIN, 19 - ink_top), scaled)
-    _text(g, (MARGIN, 110),
-          "7 sea drones sink a Russian corvette off Libya · COP31 collapses with no deal · Nvidia brings Huang back as CEO",
-          FT.deckline, RED)
+    kicker = ("7 sea drones sink a Russian corvette off Libya · COP31 "
+              "collapses with no deal · Nvidia brings Huang back as CEO")
+    klayer = Image.new("RGBA", (1100, 60), (0, 0, 0, 0))
+    kd = ImageDraw.Draw(klayer)
+    kd.text((0, 0), kicker, font=FT.deckline, fill=RED + (255,))
+    kb = klayer.getbbox()
+    kcrop = klayer.crop(kb).resize((1000, kb[3] - kb[1]), Image.LANCZOS)
+    page.paste(kcrop, (MARGIN, 117), kcrop)
     _text(g, (RIGHT, 1), "36 STORIES · 7 REGIONS · MON 23 – TUE 24 NOV 2026",
           FT.kicker, INK, anchor="ra")
-    _rect(g, 0, 131, W, 133, INK)
+    _rect(g, 0, 133, W, 135, INK)
 
-    # ---- numbers strip, 135-215: six blocks across the full width,
-    # big red 36px number + ink 11px caption in each, CARD
-    # background, ink rules, vertical dividers between blocks. ----
-    _rect(g, MARGIN, 135, RIGHT, 215, CARD, out=RULE)
-    _text(g, (MARGIN + 8, 138), "THE DAY IN NUMBERS", FT.time, RED)
+    # ---- numbers strip, 137-215: six blocks across the full width,
+    # big 36px number in its story's region colour + ink 11px
+    # caption in each, CARD background, ink rules, vertical dividers
+    # between blocks. ----
+    _rect(g, MARGIN, 137, RIGHT, 215, CARD, out=RULE)
+    _text(g, (MARGIN + 8, 140), "THE DAY IN NUMBERS", FT.time, RED)
     block_w = 1000 / len(STATS)
-    for i, (value, caption) in enumerate(STATS):
+    for i, (value, caption, region) in enumerate(STATS):
         bx = MARGIN + i * block_w
         if i > 0:
-            _line(g, [bx, 140, bx, 210], RULE)
-        _text(g, (bx + 8, 154), value, FT.stat_num, RED)
-        _text(g, (bx + 8, 196), caption, FT.stat_cap, INK)
+            _line(g, [bx, 142, bx, 210], RULE)
+        _text(g, (bx + 8, 156), value, FT.stat_num,
+              REGION_FILL[region])
+        _text(g, (bx + 8, 198), caption, FT.stat_cap, INK)
 
-    # ---- region bar, 219-230: seven equal segments, count after the
-    # name, white 9px bold centred in each segment. ----
-    bar_x, bar_y, bar_w, bar_h = MARGIN, 219, 1000, 11
-    seg = bar_w / len(REGIONS)
-    for i, (label, count, fill) in enumerate(REGIONS):
-        sx = bar_x + i * seg
-        _rect(g, sx, bar_y, sx + seg - 1, bar_y + bar_h, fill)
-        _text(g, (sx + seg / 2, bar_y + 6), "%s %d" % (label, count),
-              FT.src, "white", anchor="mm")
+    # ---- region bar, 219-236: seven SEPARATE boxes, 18px tall,
+    # each sized to its text with wider padding, ~7px white gaps,
+    # the whole row centred. Short label "ASIA". ----
+    bar_y, bar_h, gap = 219, 18, 7
+    widths = []
+    for label, count, fill in REGIONS:
+        widths.append(int(g.textlength("%s %d" % (label, count),
+                                       font=FT.time)) + 20)
+    total = sum(widths) + gap * (len(widths) - 1)
+    sx = (W - total) // 2
+    for (label, count, fill), w in zip(REGIONS, widths):
+        _rect(g, sx, bar_y, sx + w, bar_y + bar_h, fill)
+        _text(g, (sx + w / 2, bar_y + 9), "%s %d" % (label, count),
+              FT.time, "white", anchor="mm")
+        sx += w + gap
 
-    # ---- UTC timeline, 234-261: a black label box at the left, then
-    # seven evenly spaced columns (98-1012, 130.6px each): red bold
-    # time above a ruled line with a red dot, bold event below.
-    # The times run Mon 23 Nov 21:29 UTC to Tue 24 Nov 03:31 UTC. ----
-    tl_y = 234
-    _rect(g, MARGIN, tl_y, 90, tl_y + 20, INK)
-    _text(g, (51, tl_y + 10), "THE DAY IN UTC", FT.src, "white",
+    # ---- UTC timeline, 240-266: a dark-navy MIDNIGHT band, EDGE TO
+    # EDGE (x 12–1012), a small red "UTC" box 26x14 at the left,
+    # then seven columns (48-1012): gold bold time above, white
+    # event below. The times run Mon 23 Nov 21:29 UTC to Tue 24 Nov
+    # 14:00 UTC. ----
+    tl_y, tl_h = 240, 26
+    _rect(g, MARGIN, tl_y, RIGHT, tl_y + tl_h, MIDNIGHT)
+    _rect(g, MARGIN, tl_y + 6, MARGIN + 26, tl_y + 20, RED)
+    _text(g, (MARGIN + 13, tl_y + 13), "UTC", FT.src, "white",
           anchor="mm")
     timeline = [("21:29", "Benghazi secure"),
                 ("22:17", "4 killed, Khartoum"),
@@ -995,24 +1170,22 @@ def build():
                 ("00:19", "UN worker killed"),
                 ("01:25", "'Ghetto law' upheld"),
                 ("02:20", "India pledges $1.6bn"),
-                ("03:31", "Iran flogs singer")]
-    tl_x0, tl_x1 = 98, RIGHT
+                ("14:00", "Chess game 1 begins")]
+    tl_x0, tl_x1 = 48, RIGHT
     col = (tl_x1 - tl_x0) / len(timeline)
-    _line(g, [tl_x0, tl_y + 13, tl_x1, tl_y + 13], INK)
     for i, (tt, ev) in enumerate(timeline):
         cx = tl_x0 + col * (i + 0.5)
-        _text(g, (cx, tl_y), tt, FT.time, RED, anchor="ma")
-        _oval(g, cx - 3, tl_y + 10, cx + 3, tl_y + 16, RED)
-        _text(g, (cx, tl_y + 17), ev, FT.time_small, INK, anchor="ma")
+        _text(g, (cx, tl_y + 1), tt, FT.tl_time, GOLD, anchor="ma")
+        _text(g, (cx, tl_y + 13), ev, FT.tl_ev, "white", anchor="ma")
 
-    # ---- heroes, 267-482: lead 396 wide, two rails 294 wide, 8px gaps. ----
+    # ---- heroes, 270-485: lead 396 wide, two rails 294 wide, 8px gaps. ----
     hero_x = MARGIN
     for i, story in enumerate(FRONT[:3]):
         w = [396, 294, 294][i]
         hero_card(page, g, story, hero_x, HERO_Y, w)
         hero_x += w + 8
 
-    # ---- smalls, 488-790: two rows of six, 162 wide, 170 pitch,
+    # ---- smalls, 491-793: two rows of six, 162 wide, 170 pitch,
     # 154 row pitch, 8px gaps. ----
     for r in range(2):
         for c in range(6):
@@ -1020,8 +1193,14 @@ def build():
             small_card(page, g, FRONT[k], MARGIN + c * 170,
                        SMALL_Y + r * SMALL_ROW)
 
-    # ---- map + also, 801-963: the light map at the left, the 21-line
-    # also-list in two 320px columns at the right. ----
+    # ---- map + also, 804-966: the light map at the left, the 21-line
+    # also-list in THREE columns at the right (col 1 = 16-22,
+    # col 2 = 23-29, col 3 = 30-36). Each also item is two lines:
+    # a main line (region-coloured number, small drawn flag, city +
+    # story in 10px bold) and a small grey sub-line (detail +
+    # source, 7px) below it. Status legend pills — REPORTED green,
+    # CLAIM amber, ONGOING blue — sit at the top-right of the
+    # also-list header. ----
     _text(g, (MARGIN, MAP_Y), "WHERE IT HAPPENED", FT.section, INK)
     _line(g, [MARGIN, MAP_Y + 16, 348, MAP_Y + 16], INK)
     _rect(g, MARGIN, MAP_Y + 22, 348, MAP_Y + 162, OCEAN, out=RULE)
@@ -1030,21 +1209,36 @@ def build():
     also_x = 364
     _text(g, (also_x, MAP_Y), "ALSO ON MON 23 – TUE 24 NOVEMBER",
           FT.section, INK)
-    _text(g, (RIGHT, MAP_Y), "21 MORE STORIES", FT.section, INK,
+    _px = RIGHT
+    for _lab, _fill in (("ONGOING", SKYBLUE), ("CLAIM", AMBER),
+                        ("REPORTED", GREEN)):
+        _tw = int(g.textlength(_lab, font=FT.pill))
+        _pw = _tw + 12
+        _x0 = _px - _pw
+        g.rounded_rectangle([_x0, MAP_Y - 1, _px, MAP_Y + 13],
+                            radius=2, fill=_fill)
+        _text(g, (_x0 + _pw / 2, MAP_Y + 6), _lab, FT.pill, "white",
+              anchor="mm")
+        _px = _x0 - 6
+    _text(g, (_px - 6, MAP_Y), "21 MORE STORIES", FT.section, INK,
           anchor="ra")
     _line(g, [also_x, MAP_Y + 16, RIGHT, MAP_Y + 16], INK)
-    col_w, rows = 320, 11
-    for i, (num, city, txt, src) in enumerate(ALSO):
-        col_i = 0 if i < rows else 1
-        row = i if i < rows else i - rows
-        x = also_x + col_i * (col_w + 8)
-        y = MAP_Y + 22 + row * 13
-        _text(g, (x, y), "%d." % num, FT.also_num, RED)
-        full = "%s: %s (%s)" % (city, txt, src)
-        lines = _wrap(g, full, FT.also, col_w - 22, 1)
-        _text(g, (x + 20, y), lines[0] if lines else "", FT.also, INK)
+    col_w, col_gap, pitch = 200, 20, 20
+    for i, (num, city, main, detail, src, region, flag) in enumerate(ALSO):
+        col_i, row = divmod(i, 7)
+        x = also_x + col_i * (col_w + col_gap)
+        y = MAP_Y + 22 + row * pitch
+        _text(g, (x, y), "%d." % num, FT.also_num,
+              REGION_FILL[region])
+        _flag(g, flag, x + 20, y, 16, 11)
+        lines = _wrap(g, main, FT.also, col_w - 40, 1)
+        _text(g, (x + 40, y), lines[0] if lines else "", FT.also, INK)
+        sub = "%s · %s" % (detail, src)
+        sub_lines = _wrap(g, sub, FT.also_sub, col_w - 40, 1)
+        _text(g, (x + 40, y + 11), sub_lines[0] if sub_lines else "",
+              FT.also_sub, GREY)
 
-    # ---- date check, 969-996: the red box naming the big stories
+    # ---- date check, 972-999: the red box naming the big stories
     # deliberately left out because they are older than this edition
     # — the ICJ Myanmar ruling (19 Nov), the Waymo freeway ban
     # (11 Nov), Fiona the hippo (19 Nov), the Sparta II salvage —
@@ -1052,7 +1246,7 @@ def build():
     # drone count, the number at the top of this page. ----
     _rect(g, MARGIN, CHK_Y, RIGHT, CHK_Y + 27, out=RED, wdt=2)
     chk = ("DATE CHECK — Every story here was reported, or updated, "
-           "Mon 23 – Tue 24 Nov 2026 (UTC), to press time 04:00 UTC. Left out, "
+           "Mon 23 – Tue 24 Nov 2026 (UTC), to press time 17:00 UTC. Left out, "
            "older: ICJ Myanmar ruling (19 Nov) · Waymo ban (11 Nov) · Fiona "
            "(19 Nov). Unconfirmed: Libya's claim the Merkury was only damaged. "
            "Tonight's real count: 7 sea drones sank the Merkury.")
@@ -1060,10 +1254,10 @@ def build():
     for j, ln in enumerate(chk_lines):
         _text(g, (20, CHK_Y - 1 + j * 11), ln, FT.datechk, INK)
 
-    # ---- footer, 999-1019: a centred sources line, then the HOW WE
+    # ---- footer, 1002-1022: a centred sources line, then the HOW WE
     # CHECKED legend as one line (the certainty key). ----
     _text(g, (512, FOOT_Y),
-          "Sources: Reuters · AP · AFP · BBC · Al Jazeera · UN News · CNN · SCMP · RTHK · ATP · FIDE · Corrections: none",
+          "Sources: Reuters · AP · AFP · BBC · Al Jazeera · UN News · CNN · SCMP · RTHK · ATP · FIDE · Vanguard · Corrections: none",
           FT.foot, GREY, anchor="ma")
     hx = 20 + int(g.textlength("HOW WE CHECKED — ", font=FT.foot))
     _text(g, (20, FOOT_Y + 10), "HOW WE CHECKED — ", FT.foot, RED)
