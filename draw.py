@@ -263,15 +263,18 @@ ALSO = [
 REGIONS = [("EUROPE", 8), ("MIDDLE EAST", 4), ("AFRICA", 5),
            ("ASIA", 5), ("AMERICAS", 5), ("OCEANIA", 1), ("WORLD", 1)]
 
-# Six numbers for the dark-navy box, one big figure per top story,
-# each in its story's region colour.
+# Six numbers for the dark-navy box, one big figure per top story.
+# Figure colours follow the user's rule (v3.1): dead -> red (240,90,90);
+# plus -> green (80,200,120); percentage >50% -> orange, >90% ->
+# orange-red (240,100,50), 100% -> dark red; sea -> blue (90,130,230).
+# Any other figure keeps its story's region colour (FIGURE_FILL).
 NUMBERS = [
-    ("7", "sea drones sink the Merkury", "AFRICA"),
-    ("26", "dead in the Cikande fire", "ASIA"),
-    ("258", "House seats for Democrats", "AMERICAS"),
-    ("$1.62bn", "India's aid to Nepal", "ASIA"),
-    ("+31%", "Nvidia jumps on Huang", "AMERICAS"),
-    ("98.79%", "Hong Kong turnout", "ASIA"),
+    ("7", "sea drones sink the Merkury", (90, 130, 230)),
+    ("26", "dead in the Cikande fire", (240, 90, 90)),
+    ("258", "House seats for Democrats", (175, 150, 230)),
+    ("$1.62bn", "India's aid to Nepal", (228, 165, 75)),
+    ("+31%", "Nvidia jumps on Huang", (80, 200, 120)),
+    ("98.79%", "Hong Kong turnout", (240, 100, 50)),
 ]
 
 # UTC timeline, Mon 23 Nov 21:29 UTC to Tue 24 Nov 14:00 UTC.
@@ -870,17 +873,17 @@ def _small_card(img, g, story, x, y):
 
 def _numbers_panel(g, x, y):
     """The dark-navy THE DAY IN NUMBERS box, fourth column of the
-    hero row: title plus six big figures, each in its story's
-    region colour, over a 10px label."""
+    hero row: title plus six big figures, each in its NUMBERS fill
+    (user colour rule, see NUMBERS), over a 10px label."""
     _rect(g, x, y, x + NUM_W, y + HERO_H, NAVY)
     _text(g, (x + 10, y + 8), "THE DAY IN NUMBERS", F.num_title, "white")
     _line(g, [(x + 10, y + 26), (x + NUM_W - 10, y + 26)],
           (80, 100, 140))
     ey = y + 30
-    for value, label, region in NUMBERS:
+    for value, label, fill in NUMBERS:
         fv = _shrink_font(g, value, F.num_big, NUM_W - 20, 18,
                           os.path.join(_NOTO, "NotoSans-Black.ttf"))
-        _text(g, (x + 10, ey), value, fv, FIGURE_FILL[region])
+        _text(g, (x + 10, ey), value, fv, fill)
         _text(g, (x + 10, ey + 26), label, F.num_lab, (200, 210, 230))
         ey += 36
     g.rectangle([x, y, x + NUM_W, y + HERO_H], outline=INK, width=1)
