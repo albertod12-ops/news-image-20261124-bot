@@ -4,7 +4,7 @@
 [![rank](https://make.fun/badge/news-image-20261124/albertod12-ops/news-image-20261124-bot/rank.svg)](https://make.fun/bounty/news-image-20261124/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261124)
 [![reward](https://make.fun/badge/news-image-20261124/albertod12-ops/news-image-20261124-bot/reward.svg)](https://make.fun/bounty/news-image-20261124?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261124)
 
-Tuesday 24 November 2026, summed up on one page: 36 stories from 7 regions, drawn as a single 1024×1024 PNG front page — the Merkury sinking off Libya, the COP31 collapse, Huang's return to Nvidia, and 33 more, each with its source and a certainty tag.
+Tuesday 24 November 2026, summed up on one page: 29 stories from 7 regions, drawn as a single 1024×1024 PNG front page — the Merkury sinking off Libya, the COP31 collapse, Huang's return to Nvidia, and 26 more, each with its source and a certainty tag.
 
 ## Run it
 

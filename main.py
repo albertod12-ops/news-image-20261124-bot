@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """news-image-20261124 — the entrypoint the grader runs.
 
-v2: same copy-only entrypoint, press time 17:00 UTC. Standard library
+v2: same copy-only entrypoint, press time 17:00 UTC. v3: template-exact
+layout (sum-23 v3.8), 29 stories, press time 17:00 UTC. Standard library
 only, and it only copies: the image itself is rendered at build time
 by draw.py (Pillow) and committed as entry.png. Running this file
 copies that PNG into the output directory and checks the copy is
